@@ -1199,5 +1199,5 @@ var SITE_CONTENT = {
   // ----- Footer -----
   footerIndependent: "Each Papa Murphy's location is independently owned and operated.",
   footerContactTemplate: "Questions? Email {email}",
-  footerDraftNote: "This is a local draft and is not a live public site."
+  footerDraftNote: ""
 };
