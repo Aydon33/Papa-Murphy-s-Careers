@@ -2,7 +2,7 @@
 
 This is a short guide for changing wording, stores, or the form. You usually only need to edit **content.js**. You do not need to change the layout files (`index.html`, `styles.css`, or `script.js`) for ordinary updates.
 
-The page is a stepped application (Store → Shifts → About you → Review) with a store list you can expand for hours. Layout and typography follow a hiring-site template, rethemed in Papa Murphy’s colors: white background, red `#da291c`, teal accent `#0e7c86`, and grayish-black text `#2b2b2b`. Do not add official logo files.
+The page is a stepped application (Store → Rank → Shifts → About you → Review) with a store list you can expand for hours. Layout and typography follow a hiring-site template, rethemed in Papa Murphy’s colors: white background, red `#da291c`, teal accent `#0e7c86`, and grayish-black text `#2b2b2b`. Do not add official logo files.
 
 This folder is a **local draft**. Nothing here is live on the public internet until Aydon approves publishing it.
 
@@ -18,8 +18,8 @@ Tips:
 - If your text has an apostrophe, that is fine inside double quotes: `"we're hiring"`.
 - To change a “Why work with us” point, edit both `title` and `text` for that point.
 - The contact email is `contactEmail`. The footer and error message will pick it up automatically.
-- Form questions also live here: the store dropdown label, the shift choices (`formShiftsOptions`), the optional “Anything else…” box, and the step names in `formSteps` (`Store`, `Shifts`, `About you`, `Review`). Changing a store in the `locations` list updates the dropdown automatically.
-- The application walks through those four steps. Each step has to be valid before Continue will move on. Labels for Continue, Back, and the review summary are also in `content.js`.
+- Form questions also live here: the store dropdown label, the rank choices (`formRankOptions`: Crew Member, Shift Lead, Supervisor, Assistant Manager, Manager), the shift choices (`formShiftsOptions`), the optional “Anything else…” box, and the step names in `formSteps` (`Store`, `Rank`, `Shifts`, `About you`, `Review`). Changing a store in the `locations` list updates the dropdown automatically.
+- The application walks through those five steps. Each step has to be valid before Continue will move on. Labels for Continue, Back, and the review summary are also in `content.js`.
 - Header wording is split into `wordmark` and `wordmarkTagline`. The hero heading is `heroTitle` plus the italic accent `heroAccent`.
 
 

@@ -8,9 +8,8 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#da291c">
   <!--
-    BRAND / LOGO: This page uses a text wordmark only.
-    Official Papa Murphy's logo files should not be added until
-    brand use is cleared with corporate.
+    BRAND / LOGO: The header uses logo.png (Papa Murphy's logo, added
+    at Aydon's request on Nov 23, 2026).
   -->
   <!--
     Fonts: Fraunces (display) and Outfit (body), matching the
@@ -28,7 +27,7 @@
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="wordmark" href="#top" id="wordmark-link">
-        <span class="wordmark-title" id="wordmark"></span>
+        <img class="wordmark-logo" src="logo.png" alt="Papa Murphy's" width="480" height="149">
         <span class="wordmark-tag" id="wordmark-tag"></span>
       </a>
       <nav class="nav" aria-label="Page">
@@ -37,6 +36,10 @@
       </nav>
     </div>
   </header>
+
+  <div class="wrap food-banner">
+    <img src="food-banner.jpg" alt="Papa Murphy's pizzas, cheesy bread, and cookies" width="1800" height="1283">
+  </div>
 
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
@@ -120,6 +123,15 @@
             </div>
 
             <div class="step-panel" id="step-1" data-step="1" hidden>
+              <fieldset class="field field-rank" id="rank-fieldset" aria-describedby="rank-hint rank-error">
+                <legend><span id="label-rank"></span> <span class="req" aria-hidden="true">*</span></legend>
+                <p class="field-hint" id="rank-hint"></p>
+                <div class="rank-options" id="rank-options"></div>
+                <p class="field-error" id="rank-error" hidden></p>
+              </fieldset>
+            </div>
+
+            <div class="step-panel" id="step-2" data-step="2" hidden>
               <fieldset class="field field-shifts" id="shifts-fieldset" aria-describedby="shifts-hint shifts-error">
                 <legend><span id="label-shifts"></span> <span class="req" aria-hidden="true">*</span></legend>
                 <p class="field-hint" id="shifts-hint"></p>
@@ -128,7 +140,7 @@
               </fieldset>
             </div>
 
-            <div class="step-panel" id="step-2" data-step="2" hidden>
+            <div class="step-panel" id="step-3" data-step="3" hidden>
               <h3 class="step-heading" id="about-title"></h3>
               <div class="form-row">
                 <div class="field">
@@ -158,12 +170,16 @@
               </div>
             </div>
 
-            <div class="step-panel" id="step-3" data-step="3" hidden>
+            <div class="step-panel" id="step-4" data-step="4" hidden>
               <h3 class="step-heading" id="review-title"></h3>
               <dl class="review-box" id="review-box">
                 <div>
                   <dt id="review-store-label"></dt>
                   <dd id="review-store-value"></dd>
+                </div>
+                <div>
+                  <dt id="review-rank-label"></dt>
+                  <dd id="review-rank-value"></dd>
                 </div>
                 <div>
                   <dt id="review-shifts-label"></dt>

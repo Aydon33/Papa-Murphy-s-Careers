@@ -153,7 +153,9 @@ h3,
 
 .wordmark {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
   text-decoration: none;
   color: var(--ink);
   line-height: 1.15;
@@ -170,9 +172,24 @@ h3,
   letter-spacing: -0.03em;
 }
 
+.wordmark-logo {
+  display: block;
+  height: 40px;
+  width: auto;
+}
+
 .wordmark-tag {
-  font-size: 0.875rem;
-  color: var(--muted);
+  font-family: var(--font-display);
+  font-weight: 680;
+  font-size: 1.15rem;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .wordmark-logo { height: 32px; }
+  .wordmark-tag { font-size: 1rem; }
 }
 
 .nav {
@@ -375,7 +392,7 @@ h3,
 
 @media (min-width: 800px) {
   .how-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5rem;
   }
 }
@@ -639,7 +656,7 @@ h3,
   margin: 1.5rem 0 1.25rem;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0.5rem;
 }
 
@@ -679,8 +696,8 @@ h3,
 
 @media (min-width: 600px) {
   .stepper button {
-    font-size: 0.92rem;
-    padding: 0.8rem 0.75rem;
+    font-size: 0.88rem;
+    padding: 0.75rem 0.55rem;
   }
 
   .stepper .step-label {
@@ -833,6 +850,59 @@ h3,
 }
 
 .shift-option input:checked + .shift-card {
+  border-color: var(--red);
+  background: var(--red-soft);
+}
+
+.field-rank {
+  border: 0;
+  padding: 0;
+  margin: 0 0 0.5rem;
+  min-width: 0;
+}
+
+.field-rank legend {
+  padding: 0;
+  display: block;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+
+.rank-options {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.rank-option {
+  display: block;
+  margin: 0;
+  cursor: pointer;
+}
+
+.rank-option input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.rank-card {
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 0.9rem 1rem;
+  font-weight: 600;
+  background: var(--paper);
+}
+
+.rank-option input:focus-visible + .rank-card {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.rank-option input:checked + .rank-card {
   border-color: var(--red);
   background: var(--red-soft);
 }
@@ -998,4 +1068,19 @@ h3,
   .store-chevron {
     transition: none;
   }
+}
+
+
+/* Food photo banner under the header */
+.food-banner {
+  margin-top: 1rem;
+}
+
+.food-banner img {
+  display: block;
+  width: 100%;
+  height: clamp(240px, 40vw, 420px);
+  object-fit: cover;
+  object-position: center 45%;
+  border-radius: var(--radius-lg);
 }

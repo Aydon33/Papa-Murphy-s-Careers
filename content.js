@@ -42,7 +42,7 @@ var SITE_CONTENT = {
   // Text wordmark shown in the header. Official logo files need
   // brand-use approval before they can replace this.
   wordmark: "Papa Murphy's",
-  wordmarkTagline: "Utah careers",
+  wordmarkTagline: "Utah Careers",
   pageTitle: "Papa Murphy's Utah Careers",
 
   // Hiring contact. Form submissions are emailed here once the
@@ -95,11 +95,15 @@ var SITE_CONTENT = {
   ],
 
   // ----- How applying works -----
-  howTitle: "Three steps, then we'll be in touch.",
+  howTitle: "Four steps, then we'll be in touch.",
   howSteps: [
     {
       title: "Choose your store",
       text: "Browse Utah locations, check hours, and pick the store you want to apply to."
+    },
+    {
+      title: "Choose a rank",
+      text: "Tell us whether you're applying for Crew, Lead, or Supervisor."
     },
     {
       title: "Tell us the shifts you can work",
@@ -1163,7 +1167,7 @@ var SITE_CONTENT = {
   formTitle: "Tell us you're interested",
   formIntro: "Fill this out and we'll get back to you. It takes about a minute.",
   formRequiredNote: "Required fields are marked with an asterisk (*).",
-  formSteps: ["Store", "Shifts", "About you", "Review"],
+  formSteps: ["Store", "Rank", "Shifts", "About you", "Review"],
   formContinueLabel: "Continue",
   formBackLabel: "Back",
   formFirstNameLabel: "First name",
@@ -1174,6 +1178,10 @@ var SITE_CONTENT = {
   formStoreHint: "Choose the store you want to work at. You can also pick one from the list above.",
   formStorePlaceholder: "Select a store",
   formStoreError: "Please choose a store.",
+  formRankLabel: "What do you want to apply for?",
+  formRankHint: "Choose one rank.",
+  formRankOptions: ["Crew Member", "Shift Lead", "Supervisor", "Assistant Manager", "Manager"],
+  formRankError: "Please choose what you want to apply for.",
   formShiftsLabel: "Which shifts can you work?",
   formShiftsHint: "Select all that apply.",
   formShiftsOptions: ["Mornings", "Mid shifts", "Nights"],
@@ -1181,6 +1189,7 @@ var SITE_CONTENT = {
   formAboutTitle: "About you",
   formReviewTitle: "Review and send",
   formReviewStoreLabel: "Store",
+  formReviewRankLabel: "Rank",
   formReviewShiftsLabel: "Shifts",
   formExtraLabel: "Anything else you'd like to share before we schedule an interview?",
   formExtraHint: "Optional. Questions, experience, or anything else we should know.",

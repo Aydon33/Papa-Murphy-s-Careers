@@ -24,7 +24,7 @@
 
   var KEY_PLACEHOLDER = "PASTE_WEB3FORMS_ACCESS_KEY_HERE";
   var DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  var STEP_COUNT = 4;
+  var STEP_COUNT = 5;
   var currentStep = 0;
 
   function text(id, value) {
@@ -190,11 +190,14 @@
     text("label-store", content.formStoreLabel);
     text("store-hint", content.formStoreHint);
     text("store-placeholder", content.formStorePlaceholder);
+    text("label-rank", content.formRankLabel);
+    text("rank-hint", content.formRankHint);
     text("label-shifts", content.formShiftsLabel);
     text("shifts-hint", content.formShiftsHint);
     text("about-title", content.formAboutTitle);
     text("review-title", content.formReviewTitle);
     text("review-store-label", content.formReviewStoreLabel);
+    text("review-rank-label", content.formReviewRankLabel);
     text("review-shifts-label", content.formReviewShiftsLabel);
     text("label-extra", content.formExtraLabel);
     text("extra-hint", content.formExtraHint);
@@ -205,6 +208,7 @@
     text("phone-error", content.formPhoneError);
     text("email-error", content.formEmailError);
     text("store-error", content.formStoreError);
+    text("rank-error", content.formRankError);
     text("shifts-error", content.formShiftsError);
     text("thank-you-title", content.thankYouTitle);
     text("thank-you-body", content.thankYouBody);
@@ -237,6 +241,7 @@
     }
 
     populateStoreSelect();
+    populateRankOptions();
     populateShiftOptions();
     renderStepper();
     showStep(0);
@@ -273,6 +278,30 @@
     }
   }
 
+
+  function populateRankOptions() {
+    var wrap = document.getElementById("rank-options");
+    if (!wrap) return;
+    wrap.innerHTML = "";
+    (content.formRankOptions || []).forEach(function (label, index) {
+      var id = "rank-option-" + index;
+      var lab = document.createElement("label");
+      lab.className = "rank-option";
+      lab.setAttribute("for", id);
+      var input = document.createElement("input");
+      input.type = "radio";
+      input.name = "rank";
+      input.value = label;
+      input.id = id;
+      var card = document.createElement("span");
+      card.className = "rank-card";
+      card.textContent = label;
+      lab.appendChild(input);
+      lab.appendChild(card);
+      wrap.appendChild(lab);
+    });
+  }
+
   function populateShiftOptions() {
     var wrap = document.getElementById("shift-options");
     if (!wrap) return;
@@ -299,7 +328,7 @@
   function renderStepper() {
     var wrap = document.getElementById("stepper");
     wrap.innerHTML = "";
-    var labels = content.formSteps || ["Store", "Shifts", "About you", "Review"];
+    var labels = content.formSteps || ["Store", "Rank", "Shifts", "About you", "Review"];
     labels.forEach(function (label, index) {
       var li = document.createElement("li");
       var btn = document.createElement("button");
@@ -574,6 +603,18 @@
     if (err) err.hidden = !on;
   }
 
+  function selectedRank() {
+    var box = document.querySelector("#rank-options input[type='radio']:checked");
+    return box ? box.value : "";
+  }
+
+  function showRankError(on) {
+    var err = document.getElementById("rank-error");
+    var fieldset = document.getElementById("rank-fieldset");
+    if (err) err.hidden = !on;
+    if (fieldset) fieldset.setAttribute("aria-invalid", on ? "true" : "false");
+  }
+
   function selectedShifts() {
     var boxes = document.querySelectorAll("#shift-options input[type='checkbox']");
     var values = [];
@@ -605,11 +646,16 @@
       return storeOk ? "" : content.formStoreError || "Please choose a store.";
     }
     if (step === 1) {
+      var rankOk = !!selectedRank();
+      showRankError(!rankOk);
+      return rankOk ? "" : content.formRankError || "Please choose what you want to apply for.";
+    }
+    if (step === 2) {
       var shiftsOk = selectedShifts().length > 0;
       showShiftsError(!shiftsOk);
       return shiftsOk ? "" : content.formShiftsError || "Please choose at least one shift.";
     }
-    if (step === 2) {
+    if (step === 3) {
       var first = form.first_name.value.trim();
       var last = form.last_name.value.trim();
       var phone = form.phone.value.trim();
@@ -639,6 +685,7 @@
 
   function updateReview() {
     text("review-store-value", chosenStoreLabel() || "—");
+    text("review-rank-value", selectedRank() || "—");
     var shifts = selectedShifts();
     text("review-shifts-value", shifts.length ? shifts.join(", ") : "—");
   }
@@ -677,7 +724,7 @@
 
     return {
       access_key: content.web3formsAccessKey.trim(),
-      subject: "New Papa Murphy's Utah application: " + fullName + " – " + storeLabel,
+      subject: "New Papa Murphy's Utah application: " + fullName + " – " + selectedRank() + " – " + storeLabel,
       from_name: fullName,
       replyto: email,
       botcheck: "",
@@ -687,6 +734,7 @@
       Phone: phone,
       Email: email,
       "Which store are you applying to?": storeLabel,
+      "What do you want to apply for?": selectedRank(),
       "Shift preference": shifts,
       "Anything else you'd like to share before we schedule an interview?": extra || "(none)"
     };
@@ -711,12 +759,13 @@
       return;
     }
 
-    var stepMessage = validateStep(2) || validateStep(0) || validateStep(1);
+    var stepMessage = validateStep(0) || validateStep(1) || validateStep(2) || validateStep(3);
     if (stepMessage) {
       setStatus(stepMessage, true);
       if (validateStep(0)) showStep(0);
       else if (validateStep(1)) showStep(1);
-      else showStep(2);
+      else if (validateStep(2)) showStep(2);
+      else showStep(3);
       return;
     }
     if (!validateForm(form)) {
@@ -794,6 +843,12 @@
     document.getElementById("store").addEventListener("change", function () {
       showFieldError("store", !findStoreByName(this.value));
       if (findStoreByName(this.value)) setStepError("");
+    });
+    document.getElementById("rank-options").addEventListener("change", function () {
+      if (selectedRank()) {
+        showRankError(false);
+        setStepError("");
+      }
     });
     document.getElementById("shift-options").addEventListener("change", function () {
       if (selectedShifts().length) {
