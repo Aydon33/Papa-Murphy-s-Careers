@@ -6,19 +6,20 @@
   <title>Papa Murphy's Utah Careers</title>
   <meta name="description" content="Join the Papa Murphy's Utah team. Share your interest in working at Utah Papa Murphy's locations.">
   <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#da291c">
   <!--
     BRAND / LOGO: This page uses a text wordmark only.
     Official Papa Murphy's logo files should not be added until
     brand use is cleared with corporate.
   -->
   <!--
-    Fonts: papamurphys.com uses Adobe Typekit "brother-1816".
-    We use freely available Google Fonts (Barlow / Barlow Condensed)
-    as a similar condensed sans, with Arial and Helvetica as fallbacks.
+    Fonts: Fraunces (display) and Outfit (body), matching the
+    typography style of the hiring-site template. Colors are
+    Papa Murphy's red, white, teal accent, and grayish-black text.
   -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;0,9..144,680;1,9..144,560&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -26,10 +27,12 @@
 
   <header class="site-header">
     <div class="wrap header-inner">
-      <!-- Text wordmark. Replace with official artwork only after brand approval. -->
-      <a class="wordmark" href="#top" id="wordmark"></a>
+      <a class="wordmark" href="#top" id="wordmark-link">
+        <span class="wordmark-title" id="wordmark"></span>
+        <span class="wordmark-tag" id="wordmark-tag"></span>
+      </a>
       <nav class="nav" aria-label="Page">
-        <a href="#locations" id="nav-locations"></a>
+        <a class="nav-text" href="#locations" id="nav-locations"></a>
         <a class="nav-apply" href="#apply" id="nav-apply"></a>
       </nav>
     </div>
@@ -37,18 +40,37 @@
 
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="wrap hero-inner">
-        <h1 id="hero-title"></h1>
-        <p class="hero-intro" id="hero-intro"></p>
-        <a class="btn btn-primary" href="#apply" id="hero-button"></a>
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow" id="hero-eyebrow"></p>
+          <h1 id="hero-title">
+            <span id="hero-title-main"></span>
+            <span class="hero-accent" id="hero-accent"></span>
+          </h1>
+          <p class="hero-intro" id="hero-intro"></p>
+          <a class="btn btn-primary" href="#apply" id="hero-button"></a>
+        </div>
+        <aside class="hero-panel" aria-label="Utah locations">
+          <p class="hero-stat-number" id="hero-stat-number"></p>
+          <p class="hero-stat-label" id="hero-stat-label"></p>
+        </aside>
       </div>
     </section>
 
     <section class="why" id="why" aria-labelledby="why-title">
+      <div class="wrap why-grid">
+        <div>
+          <h2 id="why-title"></h2>
+          <p class="section-intro" id="why-intro"></p>
+        </div>
+        <ul class="why-list" id="why-points"></ul>
+      </div>
+    </section>
+
+    <section class="how" id="how" aria-labelledby="how-title">
       <div class="wrap">
-        <h2 id="why-title"></h2>
-        <p class="section-intro" id="why-intro"></p>
-        <div class="why-grid" id="why-points"></div>
+        <h2 id="how-title"></h2>
+        <ol class="how-list" id="how-steps"></ol>
       </div>
     </section>
 
@@ -67,76 +89,123 @@
     </section>
 
     <section class="apply" id="apply" aria-labelledby="form-title">
-      <div class="wrap">
-        <div class="apply-inner">
+      <div class="wrap apply-wrap">
+        <p class="eyebrow" id="form-eyebrow"></p>
         <h2 id="form-title"></h2>
         <p class="section-intro" id="form-intro"></p>
         <p class="form-required-note" id="form-required-note"></p>
 
+        <ol class="stepper" id="stepper"></ol>
+
         <!-- Shown when the Web3Forms key in content.js is still the placeholder. -->
         <div class="notice notice-warn" id="form-not-connected" hidden role="status"></div>
 
-        <form id="interest-form" novalidate>
-          <!-- Honeypot: leave empty. Web3Forms ignores submissions when this is filled. -->
-          <div class="hp" aria-hidden="true">
-            <label for="botcheck">Leave this field empty</label>
-            <input type="checkbox" name="botcheck" id="botcheck" tabindex="-1" autocomplete="off">
-          </div>
-
-          <div class="form-row">
-            <div class="field">
-              <label for="first-name"><span id="label-first"></span> <span class="req" aria-hidden="true">*</span></label>
-              <input id="first-name" name="first_name" type="text" required autocomplete="given-name" maxlength="80">
+        <div class="apply-card" id="apply-card">
+          <form id="interest-form" novalidate>
+            <!-- Honeypot: leave empty. Web3Forms ignores submissions when this is filled. -->
+            <div class="hp" aria-hidden="true">
+              <label for="botcheck">Leave this field empty</label>
+              <input type="checkbox" name="botcheck" id="botcheck" tabindex="-1" autocomplete="off">
             </div>
-            <div class="field">
-              <label for="last-name"><span id="label-last"></span> <span class="req" aria-hidden="true">*</span></label>
-              <input id="last-name" name="last_name" type="text" required autocomplete="family-name" maxlength="80">
-            </div>
-          </div>
 
-          <div class="form-row">
-            <div class="field">
-              <label for="phone"><span id="label-phone"></span> <span class="req" aria-hidden="true">*</span></label>
-              <input id="phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel"
-                     placeholder="801-555-1234"
-                     pattern="^\s*(?:\+1[\s.\-]?)?(?:\(?\d{3}\)?[\s.\-]?)\d{3}[\s.\-]?\d{4}\s*$"
-                     aria-describedby="phone-error">
-              <p class="field-error" id="phone-error" hidden></p>
+            <div class="step-panel" id="step-0" data-step="0">
+              <div class="field">
+                <label for="store"><span id="label-store"></span> <span class="req" aria-hidden="true">*</span></label>
+                <p class="field-hint" id="store-hint"></p>
+                <select id="store" name="preferred_store" required aria-describedby="store-error">
+                  <option value="" selected disabled id="store-placeholder"></option>
+                </select>
+                <p class="field-error" id="store-error" hidden></p>
+              </div>
             </div>
-            <div class="field">
-              <label for="email"><span id="label-email"></span> <span class="req" aria-hidden="true">*</span></label>
-              <input id="email" name="email" type="email" required autocomplete="email" maxlength="120"
-                     aria-describedby="email-error">
-              <p class="field-error" id="email-error" hidden></p>
+
+            <div class="step-panel" id="step-1" data-step="1" hidden>
+              <fieldset class="field field-shifts" id="shifts-fieldset" aria-describedby="shifts-hint shifts-error">
+                <legend><span id="label-shifts"></span> <span class="req" aria-hidden="true">*</span></legend>
+                <p class="field-hint" id="shifts-hint"></p>
+                <div class="shift-options" id="shift-options"></div>
+                <p class="field-error" id="shifts-error" hidden></p>
+              </fieldset>
             </div>
-          </div>
 
-          <div class="field">
-            <label for="extra" id="label-extra"></label>
-            <p class="field-hint" id="extra-hint"></p>
-            <textarea id="extra" name="message" rows="5" maxlength="2000"></textarea>
-          </div>
+            <div class="step-panel" id="step-2" data-step="2" hidden>
+              <h3 class="step-heading" id="about-title"></h3>
+              <div class="form-row">
+                <div class="field">
+                  <label for="first-name"><span id="label-first"></span> <span class="req" aria-hidden="true">*</span></label>
+                  <input id="first-name" name="first_name" type="text" required autocomplete="given-name" maxlength="80">
+                </div>
+                <div class="field">
+                  <label for="last-name"><span id="label-last"></span> <span class="req" aria-hidden="true">*</span></label>
+                  <input id="last-name" name="last_name" type="text" required autocomplete="family-name" maxlength="80">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="phone"><span id="label-phone"></span> <span class="req" aria-hidden="true">*</span></label>
+                  <input id="phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel"
+                         placeholder="801-555-1234"
+                         pattern="^\s*(?:\+1[\s.\-]?)?(?:\(?\d{3}\)?[\s.\-]?)\d{3}[\s.\-]?\d{4}\s*$"
+                         aria-describedby="phone-error">
+                  <p class="field-error" id="phone-error" hidden></p>
+                </div>
+                <div class="field">
+                  <label for="email"><span id="label-email"></span> <span class="req" aria-hidden="true">*</span></label>
+                  <input id="email" name="email" type="email" required autocomplete="email" maxlength="120"
+                         aria-describedby="email-error">
+                  <p class="field-error" id="email-error" hidden></p>
+                </div>
+              </div>
+            </div>
 
-          <p class="form-status" id="form-status" role="alert" hidden></p>
-          <button type="submit" class="btn btn-primary" id="form-submit"></button>
-          <p class="privacy" id="form-privacy"></p>
-        </form>
+            <div class="step-panel" id="step-3" data-step="3" hidden>
+              <h3 class="step-heading" id="review-title"></h3>
+              <dl class="review-box" id="review-box">
+                <div>
+                  <dt id="review-store-label"></dt>
+                  <dd id="review-store-value"></dd>
+                </div>
+                <div>
+                  <dt id="review-shifts-label"></dt>
+                  <dd id="review-shifts-value"></dd>
+                </div>
+              </dl>
+              <div class="field">
+                <label for="extra" id="label-extra"></label>
+                <p class="field-hint" id="extra-hint"></p>
+                <textarea id="extra" name="message" rows="5" maxlength="2000"></textarea>
+              </div>
+            </div>
+
+            <p class="form-status" id="form-status" role="alert" hidden></p>
+            <p class="field-error step-error" id="step-error" role="alert" hidden></p>
+
+            <div class="form-nav">
+              <button type="button" class="btn btn-back" id="form-back"></button>
+              <button type="button" class="btn btn-primary" id="form-continue"></button>
+              <button type="submit" class="btn btn-primary" id="form-submit" hidden></button>
+            </div>
+            <p class="privacy" id="form-privacy"></p>
+          </form>
+        </div>
 
         <!-- Shown after a successful submission. Nothing is saved in the browser. -->
         <div class="thank-you" id="thank-you" hidden>
           <h2 id="thank-you-title"></h2>
           <p id="thank-you-body"></p>
         </div>
-        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="wrap">
-      <p id="footer-independent"></p>
+    <div class="wrap footer-inner">
+      <div>
+        <p class="footer-brand" id="footer-brand"></p>
+        <p id="footer-independent"></p>
+        <p class="footer-draft" id="footer-draft"></p>
+      </div>
       <p id="footer-contact"></p>
-      <p class="footer-draft" id="footer-draft"></p>
     </div>
   </footer>
 
