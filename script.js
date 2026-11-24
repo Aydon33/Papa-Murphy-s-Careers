@@ -699,6 +699,18 @@
     return ok;
   }
 
+  function showThankYou(form) {
+    form.hidden = true;
+    document.getElementById("apply-card").hidden = true;
+    document.getElementById("form-not-connected").hidden = true;
+    document.getElementById("form-required-note").hidden = true;
+    document.getElementById("form-intro").hidden = true;
+    document.getElementById("stepper").hidden = true;
+    document.getElementById("thank-you").hidden = false;
+    document.getElementById("thank-you").focus();
+    document.getElementById("thank-you-title").focus();
+  }
+
   function setStatus(message, isError) {
     var el = document.getElementById("form-status");
     if (!message) {
@@ -772,6 +784,14 @@
       return;
     }
 
+    // Test filter: if the note is only the word "test" (any capitalization,
+    // trailing punctuation ok), show the normal thank-you but send nothing.
+    var noteOnly = (form.message && form.message.value || "").trim().replace(/[.!?\s]+$/, "");
+    if (/^test$/i.test(noteOnly)) {
+      showThankYou(form);
+      return;
+    }
+
     var payload = buildSubmissionPayload(form);
 
     var button = document.getElementById("form-submit");
@@ -796,15 +816,7 @@
         if (!result.ok) {
           throw new Error((result.data && result.data.message) || "submit failed");
         }
-        form.hidden = true;
-        document.getElementById("apply-card").hidden = true;
-        document.getElementById("form-not-connected").hidden = true;
-        document.getElementById("form-required-note").hidden = true;
-        document.getElementById("form-intro").hidden = true;
-        document.getElementById("stepper").hidden = true;
-        document.getElementById("thank-you").hidden = false;
-        document.getElementById("thank-you").focus();
-        document.getElementById("thank-you-title").focus();
+        showThankYou(form);
       })
       .catch(function () {
         setStatus(withEmail(content.formError), true);
